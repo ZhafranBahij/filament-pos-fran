@@ -51,6 +51,7 @@ class PatientResource extends Resource
                 ->relationship('owner', 'name')
                 ->searchable() // with search version
                 ->preload()
+
                 // Display Modal to Create Another Data
                 ->createOptionForm([
                     Forms\Components\TextInput::make('name')
