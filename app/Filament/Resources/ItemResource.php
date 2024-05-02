@@ -64,6 +64,7 @@ class ItemResource extends Resource
                     Forms\Components\TextInput::make('percentange')
                         ->numeric()
                         ->required()
+                        ->suffix('%')
                         ->maxValue(100),
                 ])
                 ->required(),
@@ -85,10 +86,15 @@ class ItemResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('item_category.name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('tax.name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('tax.percentange')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('stock')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('true_price'),
                 ImageColumn::make('image'),
 
             ])
@@ -97,6 +103,7 @@ class ItemResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
