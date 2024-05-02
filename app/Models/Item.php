@@ -13,4 +13,9 @@ class Item extends Model
     {
         return $this->belongsTo(ItemCategory::class);
     }
+
+    public function tax()
+    {
+        return $this->belongsTo(Tax::class);
+    }
 }

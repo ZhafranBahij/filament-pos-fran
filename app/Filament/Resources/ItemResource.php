@@ -12,6 +12,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
+
+
 
 class ItemResource extends Resource
 {
@@ -48,6 +52,28 @@ class ItemResource extends Resource
                 ])
                 ->required(),
 
+                Forms\Components\Select::make('tax_id')
+                ->relationship('tax', 'name') //! The name of relationship MUST same as relation and FOREIGN KEY
+                ->searchable()
+                ->preload()
+                ->createOptionForm([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+
+                    Forms\Components\TextInput::make('percentange')
+                        ->numeric()
+                        ->required()
+                        ->maxValue(100),
+                ])
+                ->required(),
+
+                FileUpload::make('image')
+                    ->directory('item')
+                    ->image()
+                    ->imageEditor()
+                    ->required(),
+
             ]);
     }
 
@@ -63,6 +89,8 @@ class ItemResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
                     ->sortable(),
+                ImageColumn::make('image'),
+
             ])
             ->filters([
                 //

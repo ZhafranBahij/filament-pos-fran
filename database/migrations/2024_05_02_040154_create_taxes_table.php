@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\ItemCategory;
-use App\Models\Tax;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('taxes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(ItemCategory::class)->nullable();
-            $table->foreignIdFor(Tax::class)->nullable();
             $table->string('name')->nullable();
-            $table->string('stock')->nullable();
-            $table->string('price')->nullable();
-            $table->string('image')->nullable();
+            $table->integer('percentange')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('taxes');
     }
 };
