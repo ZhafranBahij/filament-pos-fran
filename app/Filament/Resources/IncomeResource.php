@@ -52,9 +52,9 @@ class IncomeResource extends Resource
                 ->nullable(),
 
                 Forms\Components\Select::make('created_by_id')
-                    ->disabled()
+                    ->disabled() // Input can't be inputted
                     ->relationship('created_by', 'name')
-                    ->default(auth()->user()->id)
+                    ->default(auth()->user()->id) // Default value
                     ->required(),
 
                 Forms\Components\Select::make('updated_by_id')
@@ -91,6 +91,7 @@ class IncomeResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
