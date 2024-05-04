@@ -21,6 +21,8 @@ class IncomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Finance';
+
     protected function mutateFormDataBeforeFill(array $data): array
     {
         $data['updated_by_id'] = auth()->id();
