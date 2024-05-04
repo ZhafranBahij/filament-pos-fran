@@ -51,17 +51,6 @@ class ExpenseResource extends Resource
                 ->imageEditor()
                 ->nullable(),
 
-                Forms\Components\Select::make('created_by_id')
-                    ->disabled()
-                    ->relationship('created_by', 'name')
-                    ->default(auth()->user()->id)
-                    ->required(),
-
-                Forms\Components\Select::make('updated_by_id')
-                    ->disabled()
-                    ->relationship('updated_by', 'name')
-                    ->default(auth()->user()->id)
-                    ->required(),
             ]);
     }
 

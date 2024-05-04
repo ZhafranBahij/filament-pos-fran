@@ -21,6 +21,13 @@ class IncomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data['updated_by_id'] = auth()->id();
+
+        return $data;
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -50,18 +57,6 @@ class IncomeResource extends Resource
                 ->image()
                 ->imageEditor()
                 ->nullable(),
-
-                Forms\Components\Select::make('created_by_id')
-                    ->disabled() // Input can't be inputted
-                    ->relationship('created_by', 'name')
-                    ->default(auth()->user()->id) // Default value
-                    ->required(),
-
-                Forms\Components\Select::make('updated_by_id')
-                    ->disabled()
-                    ->relationship('updated_by', 'name')
-                    ->default(auth()->user()->id)
-                    ->required(),
 
             ]);
     }

@@ -10,6 +10,13 @@ class EditExpense extends EditRecord
 {
     protected static string $resource = ExpenseResource::class;
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['updated_by_id'] = auth()->id();
+
+        return $data;
+    }
+
     protected function getHeaderActions(): array
     {
         return [
