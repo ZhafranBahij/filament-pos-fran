@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(ItemCategory::class)->nullable();
             $table->foreignIdFor(Tax::class)->nullable();
+            $table->string('code')->nullable();
             $table->string('name')->nullable();
             $table->string('stock')->nullable();
             $table->string('price')->nullable();

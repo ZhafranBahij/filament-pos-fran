@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\IncomeCategory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('incomes', function (Blueprint $table) {
+        Schema::create('company_debt_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(IncomeCategory::class)->nullable();
             $table->string('name')->nullable();
-            $table->integer('price')->nullable();
-            $table->string('attachment')->nullable();
-            $table->foreignId('created_by_id')->constrained('users')->nullable();
-            $table->foreignId('updated_by_id')->constrained('users')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('incomes');
+        Schema::dropIfExists('company_debt_categories');
     }
 };

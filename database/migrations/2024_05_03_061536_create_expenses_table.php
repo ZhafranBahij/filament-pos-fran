@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->integer('price')->nullable();
             $table->string('attachment')->nullable();
-            $table->foreignId('created_by_id')->nullable();
-            $table->foreignId('updated_by_id')->nullable();
+            $table->foreignId('created_by_id')->constrained('users')->nullable();
+            $table->foreignId('updated_by_id')->constrained('users')->nullable();
             $table->timestamps();
         });
     }
