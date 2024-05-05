@@ -21,9 +21,11 @@ class ItemResource extends Resource
 {
     protected static ?string $model = Item::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
     protected static ?string $navigationGroup = 'Product';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

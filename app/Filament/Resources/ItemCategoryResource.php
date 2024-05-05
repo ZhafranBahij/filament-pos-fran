@@ -7,6 +7,7 @@ use App\Filament\Resources\ItemCategoryResource\RelationManagers;
 use App\Models\ItemCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Panel;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -17,9 +18,13 @@ class ItemCategoryResource extends Resource
 {
     protected static ?string $model = ItemCategory::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
     protected static ?string $navigationGroup = 'Product';
+
+    protected static ?string $navigationParentItem = 'Items';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

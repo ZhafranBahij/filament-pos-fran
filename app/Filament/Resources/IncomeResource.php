@@ -19,9 +19,11 @@ class IncomeResource extends Resource
 {
     protected static ?string $model = Income::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-trending-up';
 
     protected static ?string $navigationGroup = 'Finance';
+
+    protected static ?int $navigationSort = 1;
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
