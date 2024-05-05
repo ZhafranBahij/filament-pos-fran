@@ -109,7 +109,9 @@ class CompanyDebtResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('customer_debt_category.name')
+                Tables\Columns\TextColumn::make('status')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('company_debt_category.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('debtor.name')
                     ->searchable(),
