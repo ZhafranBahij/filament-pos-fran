@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 
 
@@ -76,8 +77,7 @@ class ItemResource extends Resource
                 FileUpload::make('image')
                     ->directory('item')
                     ->image()
-                    ->imageEditor()
-                    ->required(),
+                    ->imageEditor(),
 
             ]);
     }
@@ -91,8 +91,10 @@ class ItemResource extends Resource
                 Tables\Columns\TextColumn::make('item_category.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('tax.name')
+                    ->label('Tax Name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('tax.percentange')
+                    ->label('Tax Percentange (%)')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('stock')
                     ->sortable(),
@@ -113,6 +115,7 @@ class ItemResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+                ExportBulkAction::make(),
             ]);
     }
 
