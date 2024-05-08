@@ -115,8 +115,16 @@ class CustomerDebtResource extends Resource
                 Tables\Columns\TextColumn::make('customer_debt_category.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('debtor.name')
+                    ->label('debtor name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('debtor.email')
+                    ->label('debtor email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('creditor.name')
+                    ->label('creditor name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('creditor.email')
+                    ->label('creditor email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->sortable(),
