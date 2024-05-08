@@ -5,34 +5,30 @@ namespace App\Imports;
 use App\Models\Income;
 use App\Models\IncomeCategory;
 use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class IncomeImport implements ToCollection, WithBatchInserts, WithChunkReading
+class IncomeImport implements ToModel, WithBatchInserts, WithChunkReading, WithHeadingRow
 {
     /**
     * @param Collection $collection
     */
-    public function collection(Collection $collection)
+    public function model(array $row)
     {
-        foreach ($collection as $item)
-        {
-            if ($item[0] == null || $item[0] == 'Name') {
-                continue;
-            }
-            $ItemCategory = IncomeCategory::firstOrCreate(
-                ['name' => $item[1]],
-            );
 
-            Income::create([
-                'name' => $item[0],
-                'income_category_id' => $ItemCategory->id,
-                'price' => $item[2],
-                'created_by_id' => auth()->user()->id,
-                'updated_by_id' => auth()->user()->id,
-            ]);
-        }
+        $category = IncomeCategory::firstOrCreate(
+            ['name' => $row['income_category']],
+        );
+
+        Income::create([
+            'name' => $row['name'],
+            'income_category_id' => $category->id,
+            'price' => $row['price'],
+            'created_by_id' => auth()->user()->id,
+            'updated_by_id' => auth()->user()->id,
+        ]);
     }
 
     public function batchSize(): int
