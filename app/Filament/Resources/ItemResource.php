@@ -16,8 +16,9 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
-
-
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 
 class ItemResource extends Resource
 {
@@ -111,6 +112,17 @@ class ItemResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('pdf')
+                ->label('PDF')
+                ->color('success')
+                ->icon('heroicon-o-shopping-cart')
+                ->action(function (Model $record) {
+                    return response()->streamDownload(function () use ($record) {
+                        echo Pdf::loadHtml(
+                            Blade::render('pdf', ['record' => $record])
+                        )->stream();
+                    }, $record->number . '.pdf');
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
